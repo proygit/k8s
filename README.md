@@ -1,4 +1,5 @@
-How to run deploy mongodb
+#How to run deploy mongodb
+
 step 1. First apply the command:
 kubectl apply -f mongo-configmap.yaml
 step 2.Then in the same way apply mongo-secret.yaml
