@@ -11,4 +11,4 @@ kubectl apply -f mongo-configmap.yaml
 First PV is created by allowcating a volume of type:hostPath and then the following PVC is applied.
 * step 8.File pvc-mongodb.yaml is applied after pv-mongodb is applied.
 * step 9: We checked that the PVC is of status "BOUND" now and we can be sure that the data for mongodb is persisted.
-* step 10.Alternatively another file **mongodb-ss.yaml** is also added to demostrate that the deployment could also be of type **Stateful** with persistence volume attached to it in a similiar way.Either of the two files **mongodb-ss.yaml** or **mongodb-deployment.yaml** could be used to deploy the database.
+* step 10.Alternatively another file **mongodb-ss.yaml** is also added to demostrate that the deployment could also be of type **Stateful** with persistence volume attached to it in a similiar way.Either of the two files **mongodb-ss.yaml with headless service mongodb-hdservice.yaml** could be used or **mongodb-deployment.yaml** could be used to deploy the database.
