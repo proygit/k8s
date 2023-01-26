@@ -9,4 +9,4 @@ spec:
       port: 8081
       targetPort: 5000
   selector:
-    app: sns-api
+    app: snsrestapi

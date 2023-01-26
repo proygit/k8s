@@ -279,7 +279,7 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
 
 
     async function postReq() {
-      let url ='http://10.152.183.37:8081/'
+      let url ='http://10.152.183.37:8081/posts' // change to exposed ip
       msg = document.getElementById('newtext').innerHTML
       let data = {'user': 'Tim Berner', 'msg': msg}
 
@@ -290,7 +290,7 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
     }
 
     async function getReq(){
-      let url = 'http://10.152.183.37:8081/postings'
+      let url = 'http://10.152.183.37:8081/posts' //change to exposed ip
       let response = await fetch(url)
 
       if (response.ok) return await response.json() 

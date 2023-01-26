@@ -3,19 +3,21 @@ kind: Deployment
 metadata:
   name: sns-api-deployment
   labels:
-    app: sns-api
+    app: snsrestapi
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: sns-api
+      app: snsrestapi
   template:
     metadata:
       labels:
-        app: sns-api
+        app: snsrestapi
     spec:
       containers:
       - name: sns-api-container
-        image: localhost:32000/sns-api:v1
+        image: tzerok/snsrestapi:v1
+        imagePullPolicy: Always
         ports:
         - containerPort: 5000
+          protocol: TCP
