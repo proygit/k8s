@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: sns-api-container
-        image: tzerok/snsrestapi:v1
+        image: tzerok/snsrestapi:v2
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
@@ -37,8 +37,3 @@ spec:
             configMapKeyRef:
               name: mongodb-configmap
               key: database_url
-        - name: MONGO_DB
-          valueFrom:
-            configMapKeyRef:
-              name: mongodb-configmap
-              key: mongo_db_name
