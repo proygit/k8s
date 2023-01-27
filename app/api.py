@@ -2,10 +2,11 @@
 from flask import Flask, jsonify, request, json
 from flask_pymongo import PyMongo
 from flask_cors import CORS
+import os
 
 app = Flask(__name__)
 CORS(app)
-app.config["MONGO_URI"] = "mongodb://10.8.129.87:27017/snspost"
+app.config["MONGO_URI"] = "mongodb://"+os.getenv("MONGODB_ADMINUSERNAME")+":"+os.getenv("MONGODB_ADMINPASSWORD")+"@"+os.getenv("MONGO_DB_URL")+"/snspost"
 db_client = PyMongo(app)
 db = db_client.db
 
@@ -23,6 +24,10 @@ db = db_client.db
 #         'msg': u'Ernest Hemingway'
 #     }
 # ]
+
+@app.route('/', methods=['GET'])
+def get_init():
+    return jsonify({'HTTP':"200 connected"})
 
 @app.route('/posts', methods=['GET'])
 def get_posts():

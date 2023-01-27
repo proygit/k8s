@@ -3,10 +3,11 @@ kind: Service
 metadata:
   name: sns-api-service
 spec:
-  type: ClusterIP
+  type: NodePort
   ports:
     - protocol: TCP
-      port: 8081
+      port: 5000
       targetPort: 5000
+      nodePort: 30001
   selector:
     app: snsrestapi
