@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: sns-api-container
-        image: tzerok/snsrestapi:v2
+        image: tzerok/snsrestapi:v9
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
