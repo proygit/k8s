@@ -16,8 +16,24 @@ spec:
     spec:
       containers:
       - name: sns-api-container
-        image: tzerok/snsrestapi:v1
+        image: tzerok/snsrestapi:v9
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
           protocol: TCP
+      env:
+        - name: MONGODB_ADMINUSERNAME
+          valueFrom:
+            secretKeyRef:
+              name: mongodb-secret
+              key: mongo-root-username
+        - name: MONGODB_ADMINPASSWORD
+          valueFrom: 
+            secretKeyRef:
+              name: mongodb-secret
+              key: mongo-root-password
+        - name: MONGO_DB_URL
+          valueFrom: 
+            configMapKeyRef:
+              name: mongodb-configmap
+              key: database_url
