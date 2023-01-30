@@ -1,3 +1,11 @@
+https://cloud.google.com/kubernetes-engine/docs/how-to/managed-certs#setting_up_a_google-managed_certificate
+
+
+Using Google-managed SSL certificates
+
+
+
+
 To create a reserved IP address, run the following command:
 gcloud compute addresses create vuscgrpfrontend --global
 
