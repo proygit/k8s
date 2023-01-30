@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-scgrp
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: vuscgrp
+    networking.gke.io/managed-certificates: managed-cert
+    kubernetes.io/ingress.class: "gce"
+spec:
+    rules:
+      - http:
+          paths:
+            - path: /
+              pathType: Prefix  
+              backend:
+                service:
+                  name: mongo-express
+                  port:
+                    number: 8081
