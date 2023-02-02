@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap
+data:
+  database_url: mongodb-service
+  mongo_db_name: snspost
