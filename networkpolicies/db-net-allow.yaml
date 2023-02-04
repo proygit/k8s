@@ -1,0 +1,24 @@
+# limit traffics going in/out of db pod
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: db-net-allow
+spec:
+  podSelector:
+    matchLabels:
+      app: mongodb
+      role: db
+  # policyTypes:
+  #   ["Ingress" , "Egress"]
+  ingress:
+  - from:
+      - podSelector:
+          matchLabels:
+            app: snsrestapi
+            role: api
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          app: snsrestapi
+          role: api
