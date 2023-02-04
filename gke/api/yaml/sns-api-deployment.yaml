@@ -5,7 +5,7 @@ metadata:
   labels:
     app: snsrestapi
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: snsrestapi
@@ -21,7 +21,7 @@ spec:
         ports:
         - containerPort: 5000
           protocol: TCP
-      env:
+        env:
         - name: MONGODB_ADMINUSERNAME
           valueFrom:
             secretKeyRef:
@@ -37,3 +37,18 @@ spec:
             configMapKeyRef:
               name: mongodb-configmap
               key: database_url
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sns-api-service
+spec:
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
+      nodePort: 30005
+  selector:
+    app: snsrestapi
+

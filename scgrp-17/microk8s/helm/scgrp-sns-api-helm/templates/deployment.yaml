@@ -38,7 +38,7 @@ spec:
             {{- range .Values.envmap }}         
             - username: {{ .username }}
               password: {{ .password }}
-              url: {{ .mongodb-service }}
+              
             {{- end }}  
           ports:
             - name: http

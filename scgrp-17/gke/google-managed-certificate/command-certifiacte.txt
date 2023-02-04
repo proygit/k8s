@@ -1,0 +1,39 @@
+To create a reserved IP address, run the following command:
+gcloud compute addresses create vuscgrpfrontend --global
+
+Replace ADDRESS_NAME with the name of the reserved IP address you are creating.
+To find the static IP address you created, run the following command:
+gcloud compute addresses describe vuscgrpfrontend --global
+
+Setting up a Google-managed certificate
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: managed-cert
+spec:
+  domains:
+    - vuscgrp
+    - vuscgrpsnsapi
+    
+kubectl apply -f managed-cert.yaml
+Apply the service for which the ingress is to be made.
+kubectl apply -f mc-service.yaml
+
+
+Create managed-cert-ingress-frontend.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: managed-cert-ingress
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: vuscgrpfrontend
+    networking.gke.io/managed-certificates: managed-cert
+    kubernetes.io/ingress.class: "gce"
+spec:
+  defaultBackend:
+    service:
+      name: mc-service
+      port:
+        number: SERVICE_PORT
+kubectl apply -f managed-cert-ingress-frontend.yaml
+kubectl get ingress
