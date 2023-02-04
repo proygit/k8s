@@ -1,0 +1,4 @@
+envmap:
+  username: username
+  password: password
+  url: mongodb-service

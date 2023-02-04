@@ -1,31 +1,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "scgrp-sns-api-helm.fullname" . }}
+  name: {{ include "scgrp-sns-frontend-helm.fullname" . }}
   labels:
-    {{- include "scgrp-sns-api-helm.labels" . | nindent 4 }}
+    {{- include "scgrp-sns-frontend-helm.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "scgrp-sns-api-helm.selectorLabels" . | nindent 6 }}
+      {{- include "scgrp-sns-frontend-helm.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
       annotations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
       labels:
-        {{- include "scgrp-sns-api-helm.selectorLabels" . | nindent 8 }}
+        {{- include "scgrp-sns-frontend-helm.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "scgrp-sns-api-helm.serviceAccountName" . }}
+      serviceAccountName: {{ include "scgrp-sns-frontend-helm.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
@@ -34,15 +34,9 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          env:
-            {{- range .Values.envmap }}         
-            - username: {{ .username }}
-              password: {{ .password }}
-              url: {{ .mongodb-service }}
-            {{- end }}  
           ports:
             - name: http
-              containerPort: 5000
+              containerPort: 80
               protocol: TCP
           livenessProbe:
             httpGet:
