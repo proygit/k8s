@@ -7,7 +7,11 @@ It has source code for both **microk8s and gke**.
 * TLS self-signed certificates - folder name (certificates) for Ingress for the frontend and the api for microk8s - folder name (ingress-tls)
 * RBAC in Microk8s in rbac folder
 
-
+**gke link**
+https://console.cloud.google.com/kubernetes/list/overview?project=eng-digit-375818
+frontend running at http://34.70.78.14/  -(http://scapgrp.com/)
+api for both get and post - http://104.197.247.205:5000/posts
+which saves in momgodb that has a Pv of google dynamic provisioning.
 **gke structure**
 * This folder has all the code for gke 
 * yaml files that are used to deploy
