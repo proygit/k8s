@@ -53,7 +53,7 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
       <!-- Profile -->
       <div class="w3-card w3-round w3-white">
         <div class="w3-container">
-         <h4 class="w3-center">Tim Berner</h4>
+         <h4 class="w3-center">TOM</h4> <!--TO CHANGE-->
          <p class="w3-center"><img src="/w3images/avatar3.png" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
          <hr>
          <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> Designer, UI</p>
@@ -240,7 +240,7 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
 
 
     async function postReq() {
-      let url ='http://192.168.68.127:5000/posts' // change to exposed ip
+      let url ='http://10.152.183.228:5000/posts' // TO CHANGE: ip
       msg = document.getElementById('newtext').innerHTML
       let data = {'user': 'Tim Berner', 'msg': msg}
 
@@ -250,17 +250,8 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
       else console.log(`Error: ${response.status}`)
     }
 
-   // async function getReq(){
-   //   let url = 'http://192.168.68.128:5000/posts' //change to exposed ip
-   //   const response = await fetch(url)
-
-    //  if (response.ok) return await response.json()
-    //  else console.log(`Error: ${response.status}`)
-    //}
-
-
-     function getReq(){
-	   let url = 'http://192.168.68.127:5000/posts' //change to exposed ip
+    function getReq(){
+	   let url = 'http://10.152.183.228:5000/posts' //TO CHANGE: IP
        return fetch(url).then((response) => {
          return response.json().then((data) => {
            return data
@@ -271,16 +262,7 @@ html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
      else console.log(`Error: ${response.status}`)
      }
 
-    // function addData() {
-    //   const api_data = getReq()
-    //   console.log(api_data)
-    //   for (let i = 0; i < api_data.length; i++){
-    //     let obj = api_data[i]
-    //     console.log(obj.data)
-    //     addData2Web(obj.msg)
-    //   }
-    // }
-
+    
     function addData() {
       const api_data = getReq()
       api_data.then((data) => {
